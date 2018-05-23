@@ -4,6 +4,11 @@ import './App.css';
 
 class App extends Component {
   render() {
+    fetch(`/api/greet`)
+      .then(response => response.json())
+      .then(json => {
+        console.log('json: ', json);
+    });
     return (
       <div className="App">
         <header className="App-header">
