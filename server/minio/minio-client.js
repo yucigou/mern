@@ -36,7 +36,7 @@ module.exports = {
         });
     },
 
-    uploadFile(bucketName, file) {
+    uploadFile(bucketName, file, cb) {
         var metaData = {
           'Content-Type': 'text/html',
           'Content-Language': 123,
@@ -44,7 +44,8 @@ module.exports = {
           'example': 5678
         }
         minioClient.fPutObject(bucketName, uuidv1(), file, metaData, (err, etag) => {
-          return console.log(err, etag) // err should be null
+          console.log(err, etag) // err should be null
+          cb()
         })
     },
 

@@ -51,9 +51,10 @@ module.exports = app => {
         const form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
             var oldpath = files.file.path;
-            minioClient.uploadFile(MINIO_BUCKET, oldpath)
-            res.write('File uploaded and transferred to Minio!');
-            res.end();
+            minioClient.uploadFile(MINIO_BUCKET, oldpath, () => {
+                res.write('File uploaded and transferred to Minio!');
+                res.end();
+            })
         });
     })
 }
