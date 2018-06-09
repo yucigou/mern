@@ -9,10 +9,7 @@ module.exports = app => {
         const {
             bucketName
         } = req.query
-        minioClient.listFiles(bucketName)
-        res.send({
-            Status: 'OK'
-        });
+        minioClient.listFiles(bucketName || MINIO_BUCKET, res)
     })
 
     app.get('/api/list/buckets', (req, res) => {

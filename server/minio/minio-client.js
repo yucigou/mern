@@ -12,13 +12,19 @@ const minioClient = new Minio.Client({
 });
 
 module.exports = {
-    listFiles(bucketName) {
+    listFiles(bucketName, res) {
         let stream = minioClient.listObjects(bucketName);
+        let list = []
         stream.on('data', function(obj) {
             console.log(obj)
+            list.push(obj)
         })
         stream.on('error', function(err) {
             console.log(err)
+            res.send(err)
+        })
+        stream.on('end', function() {
+            res.send(list)
         })
     },
 

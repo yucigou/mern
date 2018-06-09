@@ -5,12 +5,24 @@ import './App.css';
 import SimpleFileUpload from './SimpleFileUpload'
 
 class App extends Component {
-  render() {
-    fetch(`/api/greet`)
+  constructor(props) {
+    super(props);
+    this.state = {
+      fileList: []
+    }
+  }
+
+  componentWillMount() {
+    fetch(`/api/list/files`)
       .then(response => response.json())
-      .then(json => {
-        console.log('json: ', json);
+      .then(data => {
+        this.setState({fileList: data})
     });
+  }
+
+  render() {
+    const listItems = this.state.fileList.map(file => <li key={file.name}>{file.name}</li>);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -20,6 +32,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <h2>File List</h2>
+        <ol>{listItems}</ol>
         <SimpleFileUpload/>
       </div>
     );

@@ -24,7 +24,7 @@ class SimpleFileUpload extends React.Component {
   onChange(e) {
     this.setState({file:e.target.files[0]})
   }
-  
+
   fileUpload(file){
     const url = '/api/upload/file';
     const formData = new FormData();
@@ -40,7 +40,7 @@ class SimpleFileUpload extends React.Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
+        <h2>File Upload</h2>
         <input type="file" onChange={this.onChange} />
         <button type="submit">Upload</button>
       </form>
